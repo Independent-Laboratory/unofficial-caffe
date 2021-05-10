@@ -142,7 +142,8 @@ void CuDNNDeconvolutionLayer<Dtype>::Reshape(
                                      stride_w);
 
     // choose forward and backward algorithms + workspace(s)
-    CUDNN_CHECK(cudnnGetConvolutionForwardAlgorithm(
+    /*
+    CUDNN_CHECK(cudnnGetConvolutionForwardAlgorithm_v7(
         handle_[0],
         top_descs_[i],
         filter_desc_,
@@ -151,7 +152,7 @@ void CuDNNDeconvolutionLayer<Dtype>::Reshape(
         CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT,
         workspace_limit_bytes,
         &fwd_algo_[i]));
-
+    */
     // We have found that CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM is
     // buggy. Thus, if this algo was chosen, choose winograd instead. If
     // winograd is not supported or workspace is larger than threshold, choose
@@ -184,7 +185,8 @@ void CuDNNDeconvolutionLayer<Dtype>::Reshape(
         &(workspace_fwd_sizes_[i])));
 
     // choose backward algorithm for filter
-    CUDNN_CHECK(cudnnGetConvolutionBackwardFilterAlgorithm(
+    /*
+    CUDNN_CHECK(cudnnGetConvolutionBackwardFilterAlgorithm_v7(
         handle_[0],
         top_descs_[i],
         bottom_descs_[i],
@@ -193,7 +195,7 @@ void CuDNNDeconvolutionLayer<Dtype>::Reshape(
         CUDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT,
         workspace_limit_bytes,
         &bwd_filter_algo_[i]));
-
+    */
     // get workspace for backwards filter algorithm
     CUDNN_CHECK(cudnnGetConvolutionBackwardFilterWorkspaceSize(
         handle_[0],
@@ -205,7 +207,8 @@ void CuDNNDeconvolutionLayer<Dtype>::Reshape(
         &workspace_bwd_filter_sizes_[i]));
 
     // choose backward algo for data
-    CUDNN_CHECK(cudnnGetConvolutionBackwardDataAlgorithm(
+    /*
+    CUDNN_CHECK(cudnnGetConvolutionBackwardDataAlgorithm_v7(
         handle_[0],
         filter_desc_,
         bottom_descs_[i],
@@ -214,7 +217,8 @@ void CuDNNDeconvolutionLayer<Dtype>::Reshape(
         CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT,
         workspace_limit_bytes,
         &bwd_data_algo_[i]));
-
+    */
+    
     // get workspace size
     CUDNN_CHECK(cudnnGetConvolutionBackwardDataWorkspaceSize(
         handle_[0],

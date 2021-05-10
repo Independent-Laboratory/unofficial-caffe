@@ -1,45 +1,41 @@
-# Caffe
+# [Unofficial] Caffe for 2021 latest environment (For Ubuntu 20.04.2 LTS 64 bit, RTX3080, CUDA 11.1, cDNN 8.2.0, python 3.8.0, opencv 4.2.0)
 
-[![Build Status](https://travis-ci.org/BVLC/caffe.svg?branch=master)](https://travis-ci.org/BVLC/caffe)
-[![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
+This is unofficial modified version of Caffe 1.0.0 supporting 2021 latest environment.
+The original repository is https://github.com/BVLC/caffe
 
-Caffe is a deep learning framework made with expression, speed, and modularity in mind.
-It is developed by Berkeley AI Research ([BAIR](http://bair.berkeley.edu))/The Berkeley Vision and Learning Center (BVLC) and community contributors.
+The modification is trivial fix and not version up.
+This is mainly for my memorandum record, however, it is OK to use this if you like this fix. 
+And if you are familiar with opensource community work and good at English conversation, it is welcome that you propose this modification to official repository instead of me (but I can not have responsibility, sorry).
 
-Check out the [project site](http://caffe.berkeleyvision.org) for all the details like
+## Modified parts
+Main modification is for supporting OpenCV 4.
+I made an example of "Makefile.config" based on "Makefile.config.Makefile.config.example".
+And I add trivial fix in some source code.
 
-- [DIY Deep Learning for Vision with Caffe](https://docs.google.com/presentation/d/1UeKXVgRvvxg9OUdh_UiC5G71UMscNPlvArsWER41PsU/edit#slide=id.p)
-- [Tutorial Documentation](http://caffe.berkeleyvision.org/tutorial/)
-- [BAIR reference models](http://caffe.berkeleyvision.org/model_zoo.html) and the [community model zoo](https://github.com/BVLC/caffe/wiki/Model-Zoo)
-- [Installation instructions](http://caffe.berkeleyvision.org/installation.html)
+## Prepare for installation
+```
+sudo apt install libboost-dev 
+sudo apt install libgflags-dev
+sudo apt install libatlas-base-dev
+sudo apt install libhdf5-dev
+sudo apt install libblas-dev
+sudo apt install libatlas-base-dev
+sudo apt install libsnappy-dev
+```
 
-and step-by-step examples.
+This instruction is from my memory and there might be some forgotten installation.
 
-## Custom distributions
+## Install and test
+```
+$ make -j8
+$ make test -j8
+$ make 
+```
+Some warning is shown, however, run test was passed on my machine.
+So, Caffe might run appropriately also in practical use.
 
- - [Intel Caffe](https://github.com/BVLC/caffe/tree/intel) (Optimized for CPU and support for multi-node), in particular Intel® Xeon processors.
-- [OpenCL Caffe](https://github.com/BVLC/caffe/tree/opencl) e.g. for AMD or Intel devices.
-- [Windows Caffe](https://github.com/BVLC/caffe/tree/windows)
+## License
+License and Copyright are same as original repository (https://github.com/BVLC/caffe).
+The same license file is attached on this repository as "LICENSE" file.
 
-## Community
-
-[![Join the chat at https://gitter.im/BVLC/caffe](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/BVLC/caffe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-Please join the [caffe-users group](https://groups.google.com/forum/#!forum/caffe-users) or [gitter chat](https://gitter.im/BVLC/caffe) to ask questions and talk about methods and models.
-Framework development discussions and thorough bug reports are collected on [Issues](https://github.com/BVLC/caffe/issues).
-
-Happy brewing!
-
-## License and Citation
-
-Caffe is released under the [BSD 2-Clause license](https://github.com/BVLC/caffe/blob/master/LICENSE).
-The BAIR/BVLC reference models are released for unrestricted use.
-
-Please cite Caffe in your publications if it helps your research:
-
-    @article{jia2014caffe,
-      Author = {Jia, Yangqing and Shelhamer, Evan and Donahue, Jeff and Karayev, Sergey and Long, Jonathan and Girshick, Ross and Guadarrama, Sergio and Darrell, Trevor},
-      Journal = {arXiv preprint arXiv:1408.5093},
-      Title = {Caffe: Convolutional Architecture for Fast Feature Embedding},
-      Year = {2014}
-    }
+In the case of I make license violation on this repository, I will fix or delete this repository quickly.

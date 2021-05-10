@@ -128,7 +128,8 @@ void CuDNNConvolutionLayer<Dtype>::Reshape(
         stride_h, stride_w);
 
     // choose forward and backward algorithms + workspace(s)
-    CUDNN_CHECK(cudnnGetConvolutionForwardAlgorithm(handle_[0],
+    /*
+    CUDNN_CHECK(cudnnGetConvolutionForwardAlgorithm_v7(handle_[0],
       bottom_descs_[i],
       filter_desc_,
       conv_descs_[i],
@@ -136,7 +137,7 @@ void CuDNNConvolutionLayer<Dtype>::Reshape(
       CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT,
       workspace_limit_bytes,
       &fwd_algo_[i]));
-
+    */
     CUDNN_CHECK(cudnnGetConvolutionForwardWorkspaceSize(handle_[0],
       bottom_descs_[i],
       filter_desc_,
@@ -145,8 +146,9 @@ void CuDNNConvolutionLayer<Dtype>::Reshape(
       fwd_algo_[i],
       &(workspace_fwd_sizes_[i])));
 
+    /*
     // choose backward algorithm for filter
-    CUDNN_CHECK(cudnnGetConvolutionBackwardFilterAlgorithm(handle_[0],
+    CUDNN_CHECK(cudnnGetConvolutionBackwardFilterAlgorithm_v7(handle_[0],
           bottom_descs_[i], top_descs_[i], conv_descs_[i], filter_desc_,
           CUDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT,
           workspace_limit_bytes, &bwd_filter_algo_[i]) );
@@ -157,7 +159,7 @@ void CuDNNConvolutionLayer<Dtype>::Reshape(
           bwd_filter_algo_[i], &workspace_bwd_filter_sizes_[i]));
 
     // choose backward algo for data
-    CUDNN_CHECK(cudnnGetConvolutionBackwardDataAlgorithm(handle_[0],
+    CUDNN_CHECK(cudnnGetConvolutionBackwardDataAlgorithm_v7(handle_[0],
           filter_desc_, top_descs_[i], conv_descs_[i], bottom_descs_[i],
           CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT,
         workspace_limit_bytes, &bwd_data_algo_[i]));
@@ -166,6 +168,7 @@ void CuDNNConvolutionLayer<Dtype>::Reshape(
     CUDNN_CHECK(cudnnGetConvolutionBackwardDataWorkspaceSize(handle_[0],
           filter_desc_, top_descs_[i], conv_descs_[i], bottom_descs_[i],
           bwd_data_algo_[i], &workspace_bwd_data_sizes_[i]) );
+    */
   }
 
   // reduce over all workspace sizes to get a maximum to allocate / reallocate

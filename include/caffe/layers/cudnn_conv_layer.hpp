@@ -66,7 +66,6 @@ class CuDNNConvolutionLayer : public ConvolutionLayer<Dtype> {
   void **workspace;  // aliases into workspaceData
 };
 #endif
-
 }  // namespace caffe
 
 #endif  // CAFFE_CUDNN_CONV_LAYER_HPP_

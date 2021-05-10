@@ -200,7 +200,7 @@ endif
 ifeq ($(USE_OPENCV), 1)
 	LIBRARIES += opencv_core opencv_highgui opencv_imgproc
 
-	ifeq ($(OPENCV_VERSION), 3)
+	ifeq ($(OPENCV_VERSION), 4)
 		LIBRARIES += opencv_imgcodecs
 	endif
 

@@ -21,6 +21,8 @@ inline const char* cudnnGetErrorString(cudnnStatus_t status) {
   switch (status) {
     case CUDNN_STATUS_SUCCESS:
       return "CUDNN_STATUS_SUCCESS";
+    case CUDNN_STATUS_VERSION_MISMATCH:
+      return "CUDNN_STATUS_VERSION_MISMATCH";
     case CUDNN_STATUS_NOT_INITIALIZED:
       return "CUDNN_STATUS_NOT_INITIALIZED";
     case CUDNN_STATUS_ALLOC_FAILED:
